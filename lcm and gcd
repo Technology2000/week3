@@ -1,0 +1,23 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+	public static void main (String[] args) {
+	    Scanner sc=new Scanner(System.in);
+	    int T=sc.nextInt();
+	    while(T-->0){
+	    long A=sc.nextLong();
+	    long B=sc.nextLong();
+		long Lcm=(A*B)/FindGcd(A,B);
+	    System.out.print(Lcm+" "+FindGcd(A,B));
+	    System.out.println();
+	}
+	}
+ static	long FindGcd(long A,long B){
+		    if(A==0)
+		    return B;
+		    else
+		    return FindGcd(B%A,A);
+		}
+}
