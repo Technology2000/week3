@@ -1,0 +1,23 @@
+class GfG
+{
+    public Node removeDuplicates(Node head) 
+    {
+        Node temp=head;
+        Node prev=head;
+         if(head==null)
+         return null;
+         HashMap<Integer,Integer> hmap=new HashMap<>();
+         while(temp!=null){
+         if(!hmap.containsKey(temp.data)){
+           hmap.put(temp.data,1); 
+           prev=temp;
+           temp=temp.next;
+         }
+         else{
+         prev.next=temp.next;
+         temp=temp.next;
+    }
+         }
+    return head;
+}
+}
