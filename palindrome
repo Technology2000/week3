@@ -1,0 +1,29 @@
+class Palindrome
+{
+    boolean isPalindrome(Node head) 
+{
+       Node slow_pointer=head;
+       Node fast_pointer=head;
+       Node prev=null;
+       while(fast_pointer!=null && fast_pointer.next!=null){
+           fast_pointer=fast_pointer.next.next;
+           Node temp=slow_pointer;
+           slow_pointer=slow_pointer.next;
+           temp.next=prev;
+           prev=temp;
+       }
+       if(fast_pointer!=null){
+       slow_pointer=slow_pointer.next;
+       }
+       while(prev!=null && slow_pointer!=null){
+           if(prev.data!=slow_pointer.data)
+           return false;
+           prev=prev.next;
+           slow_pointer=slow_pointer.next;
+       }
+      if(prev==null && slow_pointer==null){
+         return true;
+      }
+       return true;
+}
+       }
