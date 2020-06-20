@@ -1,0 +1,72 @@
+class Node{
+    int key;
+    int value;
+    Node next;
+    Node prev;
+    Node(int key,int value){
+        this.key=key;
+        this.value=value;
+    }
+}
+class LRUCache{
+    Node head=null;
+    Node tail=null;
+    int capacity;
+    HashMap<Integer,Node> hmap;
+    public LRUCache(int capacity) {
+        this.capacity=capacity;
+      hmap=new HashMap<>();
+    }
+    public int get(int key) {
+        if(hmap.containsKey(key)){
+            Node node=hmap.get(key);
+            remove(node);
+            putOnTop(node);
+            return node.value;
+        }
+        return -1;
+    }
+    
+    public void put(int key, int value) {
+        if(hmap.containsKey(key)){
+            Node t=hmap.get(key);
+             t.value=value;
+            remove(t);
+            putOnTop(t);
+        }
+        else{
+            if(hmap.size()==capacity){
+            hmap.remove(tail.key);
+            remove(tail);
+        }
+        Node node=new Node(key,value);
+        hmap.put(key,node);
+        putOnTop(node);
+    }
+}
+    public void remove(Node node){
+        if(node.prev!=null){
+            node.prev.next=node.next;
+        }
+        else{
+            head=node.next;
+        }
+        if(node.next!=null){
+            node.next.prev=node.prev;
+        }
+        else{
+        tail=node.prev;
+        }   
+    }
+    public void putOnTop(Node node){
+        node.next=head;
+        node.prev=null;
+        if(head!=null){
+            head.prev=node;
+        }
+        head=node;
+        if(tail==null){
+         tail=node;   
+        }
+    }
+}
