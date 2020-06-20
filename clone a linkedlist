@@ -1,0 +1,30 @@
+class Clone {
+    Node copyList(Node head) {
+        Node current=head;
+        Node temp=null;
+        while(current!=null){
+           temp=current.next;
+        current.next=new Node(current.data);
+            current.next.next=temp;
+            current=temp;
+        }
+        current=head;
+        while(current!=null){
+         if(current.next!=null){
+        current.next.arb=(current.arb!=null)?current.arb.next:current.arb;
+        current=(current.next!=null)?current.next.next:current.next;
+            }
+        }
+       Node original=head;
+       Node copy=head.next;
+       temp=copy;
+       while(original!=null && copy!=null){
+    original.next=(original.next!=null)?original.next.next:original.next;
+    copy.next=(copy.next!=null)?copy.next.next:copy.next;
+         original=original.next;
+          copy=copy.next;
+       }
+       return temp;
+    }
+       }
+
