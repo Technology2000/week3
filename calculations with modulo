@@ -1,0 +1,41 @@
+import java.util.*;
+class TestClass {
+public static long d,x,y;
+public static void main(String args[] ) throws Exception {
+Scanner s = new Scanner(System.in);
+long A=s.nextLong();
+long B=s.nextLong();
+long C=s.nextLong();
+long M=s.nextLong();
+long prod=modularpower(A,B,M);
+long divi=modInverse(C,M);
+long ans=((prod%M)*(divi%M))%M;
+System.out.println(ans);
+}
+public static long modularpower(long A,long B,long M){
+if(B==0)
+return 1;
+else if(B%2==0){
+return modularpower((A*A)%M,B/2,M);
+}
+else
+return ((A%M)*modularpower((A*A)%M,(B-1)/2,M))%M;
+}
+public static long modInverse(long C,long M){
+extendedEuclid(C,M);
+return (x%M+M)%M;
+}
+public static void extendedEuclid(long A, long B) {
+if(B == 0) {
+d = A;
+x = 1;
+y = 0;
+}
+else {
+extendedEuclid(B, A%B);
+long temp = x;
+x = y;
+y = temp - (A/B)*y;
+}
+}
+}
