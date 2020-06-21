@@ -1,0 +1,81 @@
+ class Node{
+     int data;
+     Node next;
+    public Node(int data) {
+        this.data=data;
+        next=null;
+        }
+    }
+class MyLinkedList{
+    Node head;
+    int size;
+    public MyLinkedList(){}
+/** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
+    public int get(int index) {
+       Node new_pointer=head;
+        if(index<0 || index>=size)
+            return -1;
+         for(int i=0;i<index;i++){
+             new_pointer=new_pointer.next;
+        }
+        return new_pointer.data;
+    }
+    
+    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
+    public void addAtHead(int val) {
+        Node prev=head;
+        head=new Node(val); 
+        head.next=prev;
+        size++;
+           }
+    
+    /** Append a node of value val to the last element of the linked list. */
+    public void addAtTail(int val) {
+        Node node=head;
+       while(node.next!=null)
+           node=node.next;
+        node.next=new Node(val);
+        size++;
+    }
+    
+    /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
+    public void addAtIndex(int index, int val) {
+        if(index>size) return;
+      if(index==0)
+          addAtHead(val);
+        else if(index==size)
+            addAtTail(val);
+        else{
+            Node current=head;
+            Node node=new Node(val);
+            for(int i=0;i<index-1;i++){
+                current=current.next;
+            }
+            node.next=current.next;
+            current.next=node;
+            size++;
+        }
+    }
+        
+    
+    /** Delete the index-th node in the linked list, if the index is valid. */
+    public void deleteAtIndex(int index) {
+        Node current=head;
+        Node prev=null;
+        Node next=null;
+        if(index>=size)
+            return;
+        if(index==0){
+            head=head.next;
+        }
+        else{
+            for(int i=0;i<index;i++){
+                prev=current;
+                current=current.next;
+                next=current.next;
+            }
+            prev.next=next;
+        }
+        size--;
+    }
+}
